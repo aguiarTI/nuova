@@ -1,0 +1,158 @@
+/** ========================
+============================
+@project    : Nuova
+@version    : 1.0
+@author     : Front-end Developer - Thiago Aguiar - thiago.aguiar86@gmail.com
+@copyright  : 2016
+============================
+@begin
+=========================**/
+	
+/** ========================
+header
+=========================**/
+header {
+	margin: 0 auto;
+	div {
+		&.row {			
+			div {
+				&.menu {
+					width: 100%;
+					position: relative;
+					display: inline-block;					
+					border-bottom: 2px solid @patternColorText7;
+				}
+			}
+		}
+	}
+	h1 {
+		width: 175px;
+		height: 41px;
+		margin: -20px 0 0 0;
+		position: absolute;
+		top: 55%;
+		left: 0;
+		a {
+			display: block;
+			width: 100%;
+			height: 100%;
+			img {
+				width: 100%;
+				position: relative;
+				display: inline-block;
+			}
+		}
+	}
+	a {
+		&.btn-menu {
+			width: 38px;
+			height: 27px;
+			position: absolute;
+			top: 35px;
+			right: 0;
+			z-index: 1;
+			display: none;
+			&:before {
+				content: "";
+				background: -webkit-linear-gradient(top, black, black 20%, white 20%, white 40%, black 40%, black 60%, white 60%, white 80%, black 80%, black 100%);
+				background: -o-linear-gradient(top, black, black 20%, white 20%, white 40%, black 40%, black 60%, white 60%, white 80%, black 80%, black 100%);
+				background: -moz-linear-gradient(top, black, black 20%, white 20%, white 40%, black 40%, black 60%, white 60%, white 80%, black 80%, black 100%);
+				background: linear-gradient(top, black, black 20%, white 20%, white 40%, black 40%, black 60%, white 60%, white 80%, black 80%, black 100%);
+				width: 2em;
+				position: absolute;
+				top: 0.05em;
+				bottom: 0.05em;
+				left: 5px;
+			}
+		}
+	}
+	nav {
+		width: auto;
+		height: 90px;
+		position: relative;
+		float: right;
+		-webkit-transition: all @timer ease;
+	    -moz-transition: all @timer ease;
+	    -ms-transition: all @timer ease;
+	    -o-transition: all @timer ease;
+	    transition: all @timer ease;
+		ul {
+			text-align: center;
+			width: 100%;
+			height: 100%;
+			position: relative;
+			float: left;
+			li {
+				height: 100%;
+				position: relative;
+				display: inline-block;
+				overflow: hidden;
+				&:before {
+					content: '';
+					background-color: @patternColorText3;
+					width: 11px;
+					height: 11px;
+					margin: 0 0 0 -6px;
+					position: absolute;
+					bottom: -15px;
+					left: 50%;
+					-ms-transform: rotate(45deg); /* IE 9 */
+					-webkit-transform: rotate(45deg); /* Chrome, Safari, Opera */
+					transform: rotate(45deg);
+					-webkit-transition: all @timer ease;
+				    -moz-transition: all @timer ease;
+				    -ms-transition: all @timer ease;
+				    -o-transition: all @timer ease;
+				    transition: all @timer ease;
+				}
+				&:hover {
+					background-color: @patternColorText5;
+					&:before {
+						content: '';
+						bottom: -5px;
+					}
+					a {
+						&:before {
+							content: '';
+							bottom: -1px;
+						}		
+						span {
+							color: @patternColorText3;
+						}
+					}	
+				}
+				a {
+					padding: 40px 15px 0;
+					position: relative;
+					display: block;
+					&:before {
+						content: '';
+						background-color: @patternColorText3;
+						width: 100%;
+						height: 4px;
+						margin: 0;
+						position: absolute;
+						bottom: -5px;
+						left: 0;
+						-webkit-transition: all @timer ease;
+					    -moz-transition: all @timer ease;
+					    -ms-transition: all @timer ease;
+					    -o-transition: all @timer ease;
+					    transition: all @timer ease;
+					}
+					span {
+						font-size: 0.9em;
+						text-transform: uppercase;
+						padding: 15px 0 18px;
+						position: relative;
+						display: block;
+					}
+				}
+			}
+		}
+	}
+}
+
+/** ========================
+@end
+=========================**/

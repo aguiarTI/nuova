@@ -1,0 +1,122 @@
+/** ========================
+============================
+@project    : Nuova
+@version    : 1.0
+@author     : Front-end Developer - Thiago Aguiar - thiago.aguiar86@gmail.com
+@copyright  : 2016
+============================
+@begin
+=========================**/
+
+/** ========================
+resolution
+=========================**/
+@media screen and (max-width: 600px) {
+	body {
+		.gallery {
+			div {
+				ul {
+					li {
+						height: 270px;
+					}
+				}
+			}
+		}
+	}
+}
+@media screen and (max-width: 767px) {
+	body {
+		header {
+			.col-xs-12 {
+				padding: 0;	
+			}
+			h1 {
+				padding-left: 15px;
+			}
+			a {
+				&.btn-menu {
+					padding-right: 15px;
+					display: block;
+				}
+			}
+			div {
+				&.row {
+					div {
+						&.menu {
+							border: 0 none;
+							height: 70px;							
+						}
+					}
+				}
+			}
+			h1 {				
+				top: 65%;
+			}
+			nav {
+				background-color: @patternColorText8;
+				width: 100%;
+				height: auto;
+				top: -246px;
+				position: absolute;
+				float: none;
+				right: 0;
+				z-index: 100;
+				ul {
+					text-align: left;
+					li {
+						width: 100%;
+						height: auto;
+						margin: 0 0 0 0;
+						padding: 0 0 0 0;
+						display: block;
+						a {
+							border-bottom: 1px solid @patternColorText3;
+							padding: 15px 0 15px 30px;
+							span {
+								margin: 0;
+								padding: 0;
+								display: inline-block;
+								vertical-align: middle;
+							}
+						}
+					}
+				}
+			}
+		}
+		form {
+			fieldset {
+				label {
+					&.name,
+					&.mail {
+						width: 100%;
+					}
+				}
+			}
+		}
+	}
+}
+@media screen and (min-width: 768px) and (max-width: 992px) {
+	header, .content, footer {
+		width: 740px;		
+	}	
+}
+@media screen and (min-width: 992px) {
+	header, .content, footer {
+		width: 960px;	
+	}
+	body {
+		.gallery {
+			div {
+				ul {
+					li {
+						height: 450px;
+					}
+				}
+			}
+		}
+	}
+}
+
+/** ========================
+@end
+=========================**/

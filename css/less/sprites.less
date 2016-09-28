@@ -1,0 +1,154 @@
+/*
+LESS variables are information about icon's compiled state, stored under its original file name
+
+.icon-home {
+  width: @icon-home-width;
+}
+
+The large array-like variables contain all information about a single icon
+@icon-home: x y offset_x offset_y width height total_width total_height image_path name;
+
+At the bottom of this section, we provide information about the spritesheet itself
+@spritesheet: width height image @spritesheet-sprites;
+*/
+@logo-nuova-name: logo-nuova;
+@logo-nuova-x: 0px;
+@logo-nuova-y: 0px;
+@logo-nuova-offset-x: 0px;
+@logo-nuova-offset-y: 0px;
+@logo-nuova-width: 175px;
+@logo-nuova-height: 41px;
+@logo-nuova-total-width: 175px;
+@logo-nuova-total-height: 41px;
+@logo-nuova-image: '../../img/sprite.png';
+@logo-nuova: 0px 0px 0px 0px 175px 41px 175px 41px '../../img/sprite.png' logo-nuova;
+@logo-nuova-2x-name: logo-nuova-2x;
+@logo-nuova-2x-x: 0px;
+@logo-nuova-2x-y: 0px;
+@logo-nuova-2x-offset-x: 0px;
+@logo-nuova-2x-offset-y: 0px;
+@logo-nuova-2x-width: 350px;
+@logo-nuova-2x-height: 82px;
+@logo-nuova-2x-total-width: 350px;
+@logo-nuova-2x-total-height: 82px;
+@logo-nuova-2x-image: '../../img/sprite@2x.png';
+@logo-nuova-2x: 0px 0px 0px 0px 350px 82px 350px 82px '../../img/sprite@2x.png' logo-nuova-2x;
+@spritesheet-width: 175px;
+@spritesheet-height: 41px;
+@spritesheet-image: '../../img/sprite.png';
+@spritesheet-sprites: @logo-nuova;
+@spritesheet: 175px 41px '../../img/sprite.png' @spritesheet-sprites;
+@retina-spritesheet-width: 350px;
+@retina-spritesheet-height: 82px;
+@retina-spritesheet-image: '../../img/sprite@2x.png';
+@retina-spritesheet-sprites: @logo-nuova-2x;
+@retina-spritesheet: 350px 82px '../../img/sprite@2x.png' @retina-spritesheet-sprites;
+
+/*
+These "retina group" variables are mappings for the naming and pairing of normal and retina sprites.
+
+The list formatted variables are intended for mixins like `retina-sprite` and `retina-sprites`.
+*/
+@logo-nuova-group-name: logo-nuova;
+@logo-nuova-group: logo-nuova @logo-nuova @logo-nuova-2x;
+@retina-groups: @logo-nuova-group;
+
+/*
+The provided classes are intended to be used with the array-like variables
+
+.icon-home {
+  .sprite-width(@icon-home);
+}
+.icon-email {
+  .sprite(@icon-email);
+}
+*/
+.sprite-width(@sprite) {
+  width: extract(@sprite, 5);
+}
+
+.sprite-height(@sprite) {
+  height: extract(@sprite, 6);
+}
+
+.sprite-position(@sprite) {
+  @sprite-offset-x: extract(@sprite, 3);
+  @sprite-offset-y: extract(@sprite, 4);
+  background-position: @sprite-offset-x @sprite-offset-y;
+}
+
+.sprite-image(@sprite) {
+  @sprite-image: extract(@sprite, 9);
+  @sprite-image-bare: ~`"@{sprite-image}".slice(1, -1)`;
+  background-image: url(@sprite-image-bare);
+}
+
+.sprite(@sprite) {
+  .sprite-image(@sprite);
+  .sprite-position(@sprite);
+  .sprite-width(@sprite);
+  .sprite-height(@sprite);
+}
+
+/*
+The `retina-sprite` class sets up rules and a media query for a sprite/retina sprite.
+  It should be used with a "retina group" variable.
+
+The media query is from CSS Tricks: https://css-tricks.com/snippets/css/retina-display-media-query/
+
+@icon-home-group: 'icon-home' @icon-home @icon-home-2x;
+
+.icon-home {
+  .retina-sprite(@icon-home-group);
+}
+*/
+.sprite-background-size(@sprite) {
+  @sprite-total-width: extract(@sprite, 7);
+  @sprite-total-height: extract(@sprite, 8);
+  background-size: @sprite-total-width @sprite-total-height;
+}
+
+.retina-sprite(@retina-group) {
+  @normal-sprite: extract(@retina-group, 2);
+  @retina-sprite: extract(@retina-group, 3);
+  .sprite(@normal-sprite);
+
+  @media (-webkit-min-device-pixel-ratio: 2),
+         (min-resolution: 192dpi) {
+    .sprite-image(@retina-sprite);
+    .sprite-background-size(@normal-sprite);
+  }
+}
+
+/*
+The `.sprites` mixin generates identical output to the CSS template
+  but can be overridden inside of LESS
+
+This must be run when you have at least 2 sprites.
+  If run with a single sprite, then there will be reference errors.
+
+.sprites(@spritesheet-sprites);
+*/
+.sprites(@sprites, @i: 1) when (@i <= length(@sprites)) {
+  @sprite: extract(@sprites, @i);
+  @sprite-name: extract(@sprite, 10);
+  .@{sprite-name} {
+    .sprite(@sprite);
+  }
+  .sprites(@sprites, @i + 1);
+}
+
+/*
+The `.retina-sprites` mixin generates a CSS rule and media query for retina groups
+  This yields the same output as CSS retina template but can be overridden in LESS
+
+.retina-sprites(@retina-groups);
+*/
+.retina-sprites(@retina-groups, @i: 1) when (@i <= length(@retina-groups)) {
+  @retina-group: extract(@retina-groups, @i);
+  @sprite-name: extract(@retina-group, 1);
+  .@{sprite-name} {
+    .retina-sprite(@retina-group);
+  }
+  .retina-sprites(@retina-groups, @i + 1);
+}
